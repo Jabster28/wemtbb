@@ -19,7 +19,13 @@ const token = process.env.tkn;
 function generateRandomNumber(max) {
   return Math.floor(Math.random() * max) + 1;
 }
-
+function hasModPerms(mess) {
+  if (mess.member.hasPermission("KICK_MEMBERS")) {
+    return true
+  } else {
+    return false
+  }
+}
 function isOk(message) {
   if (message.author.bot) {
     return false
@@ -62,7 +68,22 @@ client.on('message', msg => {
   }
 });
 
-
+// !mod
+client.on('message', msg => {
+  if (isOk(msg)) {
+    mess = msg.content.toLowerCase().split(" ");
+    if (mess[0] == "!mod") {
+      if (hasModPerms(msg)) {
+        for (var i = 0; i < msg.guild.roles.array().length; i++) {
+          msg.guild.roles.array()[i] = role
+          if (role.name.toLowerCase() == "mod" || role.name.toLowerCase() == "mods") {
+            doTheThing();
+          }
+        }
+      }
+    }
+  }
+});
 // Login
 
 client.login(token);
