@@ -105,7 +105,7 @@ client.on('message', msg => {
       if (hasModPerms(msg)) {
         mess.shift()
         for (var i = 0; i < mess.length; i++) {
-          if (mess[i].charAt(0) == "@") {
+          if (mess[i].charAt(0) == "<" && mess[i].charAt(1) == "@") {
             mess.splice(i, 1)
           }
         }
