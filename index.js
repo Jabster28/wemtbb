@@ -126,26 +126,20 @@ client.on('message', msg => {
   }
 });
 
-// -makeachannel
+// -createchannel
 client.on('message', msg => {
   if (isOk(msg)) {
     mess = msg.content.toLowerCase().split(" ");
-    if (mess[0] == "-makeachannel") {
+    if (mess[0] == "-createchannel") {
       if (hasModPerms(msg)) {
         mess.shift()
-        role = msg.guild.createRole({
-          name: mess,
-          color: "GREEN",
-          mentionable: "false"
-        })
-        msg.mentions.members.array()[0].addRole(role);
-        msg.mentions.members.array()[1].addRole(role);
         for (var i = 0; i < mess.length; i++) {
           if (mess[i].charAt(0) == "<" && mess[i].charAt(1) == "@") {
             mess.splice(i, 1)
             i = i - 1
           }
         }
+        role = msg.mentions.roles.array()[0].name
         msg.guild.createChannel(mess.join(" ")).then(channel => chan = channel)
         chanid = chan.id
         console.log(chanid)
@@ -163,7 +157,7 @@ client.on('message', msg => {
         })
         stuff.channels.push({
           name: mess.join(" "),
-          users: [msg.mentions.users.array()[0].tag, msg.mentions.users.array()[1].tag]
+          role: role
         })
         console.log(mess)
         console.log(msg.content);
