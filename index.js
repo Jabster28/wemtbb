@@ -138,6 +138,8 @@ client.on('message', msg => {
           i = i - 1
         }
       }
+      console.log(mess)
+      console.log(msg.content)
       msg.guild.createRole({
         name: mess,
         mentionable: true
