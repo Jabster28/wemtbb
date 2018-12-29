@@ -141,10 +141,11 @@ client.on('message', msg => {
       msg.guild.createRole({
         name: mess,
         mentionable: true
-      }).then(role =>
-        for (var i = 0; i < msg.mentions.members.array().length; i++) {
-          msg.mentions.members.array()[i].addRole(role)
-        })
+      }).then(role => newrole = role).catch(console.error);
+
+      for (var i = 0; i < msg.mentions.members.array().length; i++) {
+        msg.mentions.members.array()[i].addRole(newrole)
+      }
     }
   }
 });
