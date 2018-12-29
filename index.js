@@ -119,7 +119,6 @@ client.on('message', msg => {
       embed = new Discord.RichEmbed();
       embed.setTitle("🏓 Pong!")
       embed.addField("Took:", (client.ping + " milliseconds."))
-      embed.setAuthor(msg.author.username, msg.author.authorURL)
       embed.setColor("BLUE")
       embed.setFooter("Made by Jabster28, made for WEMT")
       msg.channel.send(embed)
