@@ -13,6 +13,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const token = process.env.tkn;
 const fs = require('fs');
+const SQLite = require("better-sqlite3");
+const sql = new SQLite('./scores.sqlite');
 var stuff = JSON.parse(fs.readFileSync("./stuff.json"))
 
 // Functions
@@ -31,6 +33,8 @@ function hasModPerms(mess) {
 
 function isOk(message) {
   if (message.author.bot) {
+    return false
+  } else if !(message.guild) {
     return false
   } else if (message.author.username == "Jabster28") {
     return true
