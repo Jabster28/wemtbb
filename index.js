@@ -117,9 +117,11 @@ client.on('message', msg => {
   if (isOk(msg)) {
     if (msg.content.toLowerCase() == "-ping") {
       embed = new Discord.RichEmbed();
-      embed.addField("Ping:", client.ping)
+      embed.setTitle("🏓 Pong!")
+      embed.addField("Took:", (client.ping + " milliseconds."))
       embed.setAuthor(msg.author.username, msg.author.authorURL)
       embed.setColor("BLUE")
+      embed.setFooter("Made by Jabster28, made for WEMT")
       msg.channel.send(embed)
     }
   }
@@ -145,12 +147,11 @@ client.on('message', msg => {
             i = i - 1
           }
         }
-        chan = msg.guild.createChannel(mess.join(" "))
+        msg.guild.createChannel(mess.join(" ")).then(channel => chan = channel)
         chanid = chan.id
         console.log(chanid)
         console.log(chan.id)
         console.log(mess)
-        findChannel(msg.guild, chanid)
         findChannel(msg.guild, chanid).overwritePermissions(role, {
           'SEND_MESSAGES': true,
           'VIEW_CHANNEL': true,
