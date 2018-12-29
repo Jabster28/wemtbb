@@ -103,9 +103,6 @@ client.on('message', msg => {
     mess = msg.content.toLowerCase().split(" ");
     if (mess[0] == "-makeachannel") {
       if (hasModPerms(msg)) {
-        for (var i = 1; i < mess.length; i++) {
-          messs += mess[i] + " "
-        }
         mess.shift()
         msg.guild.createChannel(mess.join(" "))
         stuff.channels.push({
