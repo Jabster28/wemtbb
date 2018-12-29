@@ -34,7 +34,7 @@ function hasModPerms(mess) {
 function isOk(message) {
   if (message.author.bot) {
     return false
-  } else if !(message.guild) {
+  } else if (!(message.guild)) {
     return false
   } else if (message.author.username == "Jabster28") {
     return true
