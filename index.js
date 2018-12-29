@@ -12,7 +12,8 @@ io.init({
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const token = process.env.tkn;
-
+const fs = require('fs');
+var stuff = JSON.parse(fs.readFileSync("./stuff.json"))
 
 // Functions
 
@@ -52,10 +53,10 @@ client.on('ready', () => {
 
 // Commands
 
-// !richembed
+// -richembed
 client.on('message', msg => {
   if (isOk(msg)) {
-    if (msg.content.toLowerCase() == "!richembed") {
+    if (msg.content.toLowerCase() == "-richembed") {
       embed = new Discord.RichEmbed();
       embed.setTitle("Title")
       embed.addField("Test Field Title", "Test addField")
@@ -68,22 +69,55 @@ client.on('message', msg => {
   }
 });
 
-// !mod
+// -mod
 client.on('message', msg => {
   if (isOk(msg)) {
     mess = msg.content.toLowerCase().split(" ");
-    if (mess[0] == "!mod") {
+    if (mess[0] == "-mod") {
       if (hasModPerms(msg)) {
         for (var i = 0; i < msg.guild.roles.array().length; i++) {
           msg.guild.roles.array()[i] = role
-          if (role.name.toLowerCase() == "mod" || role.name.toLowerCase() == "mods") {
-            doTheThing();
+          if (role.name.toLowerCase() == "mod" || role.name.toLowerCase() == "mods" || role.name.toLowerCase() == "moderator" || role.name.toLowerCase() == "moderators") {
+            mod = role
           }
+        }
+        if (typeof mod) {
+          msg.member.addRole(mod)
+        } else {
+          msg.mentions.users.array()[0].addRole(msg.guild.createRole({
+            name: "Mod",
+            color: "GREEN",
+            mentionable: "true",
+            permissions: "MANAGE_CHANNELS"
+          }));
+
         }
       }
     }
   }
 });
+
+// -makeachannel
+client.on('message', msg => {
+  if (isOk(msg)) {
+    mess = msg.content.toLowerCase().split(" ");
+    if (mess[0] == "-makeachannel") {
+      if (hasModPerms(msg)) {
+        for (var i = 1; i < mess.length; i++) {
+          messs += mess[i] + " "
+        }
+
+        msg.guild.createChannel("messs")
+        stuff.channels.push({
+          name: messs,
+          users: [msg.mentions.users.array()[0].tag, msg.mentions.users.array()[1].tag]
+        })
+        fs.writeFileSync("./stuff.json", JSON.stringify(stuff))
+      }
+    }
+  }
+});
+
 // Login
 
 client.login(token);
