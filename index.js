@@ -112,6 +112,19 @@ client.on('message', msg => {
   }
 });
 
+// !ping
+client.on('message', msg => {
+  if (isOk(msg)) {
+    if (msg.content.toLowerCase() == "!ping") {
+      embed = new Discord.RichEmbed();
+      embed.addField("Ping:", client.ping)
+      embed.setAuthor(msg.author.username, msg.author.authorURL)
+      embed.setColor("BLUE")
+      msg.channel.send(embed)
+    }
+  }
+});
+
 // -makeachannel
 client.on('message', msg => {
   if (isOk(msg)) {
