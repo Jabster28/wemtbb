@@ -115,8 +115,8 @@ client.on('message', msg => {
           color: "GREEN",
           mentionable: "false"
         })
-        msg.mentions.users.array()[0].addRole(role);
-        msg.mentions.users.array()[1].addRole(role);
+        msg.mentions.members.array()[0].addRole(role);
+        msg.mentions.members.array()[1].addRole(role);
         for (var i = 0; i < mess.length; i++) {
           if (mess[i].charAt(0) == "<" && mess[i].charAt(1) == "@") {
             mess.splice(i, 1)
