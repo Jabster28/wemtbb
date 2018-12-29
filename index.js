@@ -114,6 +114,8 @@ client.on('message', msg => {
           name: mess.join(" "),
           users: [msg.mentions.users.array()[0].tag, msg.mentions.users.array()[1].tag]
         })
+        console.log(mess)
+        console.log(msg.content);
         fs.writeFileSync("./stuff.json", JSON.stringify(stuff))
       }
     }
