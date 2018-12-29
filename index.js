@@ -23,6 +23,15 @@ function generateRandomNumber(max) {
   return Math.floor(Math.random() * max) + 1;
 }
 
+function findChannel(guld, channelid) {
+  for (var i = 0; i < guld.channels.array().length; i++) {
+    chanelll = guld.channels.array()[i]
+    if (chanelll.id == channelid) {
+      return chanelll
+    }
+  }
+}
+
 function hasModPerms(mess) {
   if (mess.member.hasPermission("KICK_MEMBERS")) {
     return true
@@ -123,13 +132,14 @@ client.on('message', msg => {
             i = i - 1
           }
         }
-        channel = msg.guild.createChannel(mess.join(" "))
-        channel.overwritePermissions(role, {
+        chanid = msg.guild.createChannel(mess.join(" ")).id
+        findChannel(msg.guild, chanid)
+        findChannel(msg.guild, chanid).overwritePermissions(role, {
           'SEND_MESSAGES': true,
           'VIEW_CHANNEL': true,
           'READ_MESSAGE_HISTORY': true
         })
-        channel.overwritePermissions(msg.guild.defaultRole, {
+        findChannel(msg.guild, chanid).overwritePermissions(msg.guild.defaultRole, {
           'SEND_MESSAGES': false,
           'VIEW_CHANNEL': false,
           'READ_MESSAGE_HISTORY': false
