@@ -126,6 +126,29 @@ client.on('message', msg => {
   }
 });
 
+// -createrole
+client.on('message', msg => {
+  if (isOk(msg)) {
+    mess = msg.content.toLowerCase().split(" ");
+    if (mess[0] == "-createrole") {
+      mess.shift()
+      for (var i = 0; i < mess.length; i++) {
+        if (mess[i].charAt(0) == "<" && mess[i].charAt(1) == "@") {
+          mess.splice(i, 1)
+          i = i - 1
+        }
+      }
+      msg.guild.createRole({
+        name: mess,
+        mentionable: true;
+      }).then(role =>
+        for (var i = 0; i < msg.mentions.members.array().length; i++) {
+          msg.mentions.members.array()[i].addRole(role)
+        })
+    }
+  }
+});
+
 // -createchannel
 client.on('message', msg => {
   if (isOk(msg)) {
