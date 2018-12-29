@@ -20,6 +20,7 @@ var stuff = JSON.parse(fs.readFileSync("./stuff.json"))
 function generateRandomNumber(max) {
   return Math.floor(Math.random() * max) + 1;
 }
+
 function hasModPerms(mess) {
   if (mess.member.hasPermission("KICK_MEMBERS")) {
     return true
@@ -27,6 +28,7 @@ function hasModPerms(mess) {
     return false
   }
 }
+
 function isOk(message) {
   if (message.author.bot) {
     return false
@@ -104,13 +106,30 @@ client.on('message', msg => {
     if (mess[0] == "-makeachannel") {
       if (hasModPerms(msg)) {
         mess.shift()
+        role = msg.guild.createRole({
+          name: mess,
+          color: "GREEN",
+          mentionable: "false"
+        })
+        msg.mentions.users.array()[0].addRole(role);
+        msg.mentions.users.array()[1].addRole(role);
         for (var i = 0; i < mess.length; i++) {
           if (mess[i].charAt(0) == "<" && mess[i].charAt(1) == "@") {
             mess.splice(i, 1)
             i = i - 1
           }
         }
-        msg.guild.createChannel(mess.join(" "))
+        channel = msg.guild.createChannel(mess.join(" "))
+        channel.overwritePermissions(role, {
+          'SEND_MESSAGES': true,
+          'VIEW_CHANNEL': true,
+          'READ_MESSAGE_HISTORY': true
+        })
+        channel.overwritePermissions(msg.guild.defaultRole, {
+          'SEND_MESSAGES': false,
+          'VIEW_CHANNEL': false,
+          'READ_MESSAGE_HISTORY': false
+        })
         stuff.channels.push({
           name: mess.join(" "),
           users: [msg.mentions.users.array()[0].tag, msg.mentions.users.array()[1].tag]
