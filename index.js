@@ -134,6 +134,8 @@ client.on('message', msg => {
         }
         chan = msg.guild.createChannel(mess.join(" "))
         chanid = chan.id
+        console.log(chanid)
+        console.log(chan.id)
         findChannel(msg.guild, chanid)
         findChannel(msg.guild, chanid).overwritePermissions(role, {
           'SEND_MESSAGES': true,
