@@ -120,7 +120,7 @@ client.on('message', msg => {
       embed.setTitle("🏓 Pong!")
       embed.addField("Took:", (client.ping + " milliseconds."))
       embed.setColor("BLUE")
-      embed.setFooter("Made by Jabster28, made for WEMT")
+      embed.setFooter("Made by Jabster28, made for Ramoth")
       msg.channel.send(embed)
     }
   }
@@ -141,11 +141,7 @@ client.on('message', msg => {
       msg.guild.createRole({
         name: mess,
         mentionable: true
-      }).then(role => newrole = role).catch(console.error);
-
-      for (var i = 0; i < msg.mentions.members.array().length; i++) {
-        msg.mentions.members.array()[i].addRole(newrole)
-      }
+      }).then(role => msg.mentions.members.array()[0].addRole(newrole)).then(role => msg.mentions.members.array()[0].addRole(newrole)).catch(console.error);
     }
   }
 });
