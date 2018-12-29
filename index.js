@@ -107,6 +107,7 @@ client.on('message', msg => {
         for (var i = 0; i < mess.length; i++) {
           if (mess[i].charAt(0) == "<" && mess[i].charAt(1) == "@") {
             mess.splice(i, 1)
+            i = i - 1
           }
         }
         msg.guild.createChannel(mess.join(" "))
