@@ -106,10 +106,10 @@ client.on('message', msg => {
         for (var i = 1; i < mess.length; i++) {
           messs += mess[i] + " "
         }
-
-        msg.guild.createChannel("messs")
+        mess.shift()
+        msg.guild.createChannel(mess.join(" "))
         stuff.channels.push({
-          name: messs,
+          name: mess.join(" "),
           users: [msg.mentions.users.array()[0].tag, msg.mentions.users.array()[1].tag]
         })
         fs.writeFileSync("./stuff.json", JSON.stringify(stuff))
