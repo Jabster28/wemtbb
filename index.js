@@ -141,7 +141,7 @@ client.on('message', msg => {
       console.log(mess)
       console.log(msg.content)
       msg.guild.createRole({
-        name: mess,
+        name: mess.join(" "),
         mentionable: true
       }).then(role => msg.mentions.members.array()[0].addRole(role)).then(role => msg.mentions.members.array()[0].addRole(role)).catch(console.error);
     }
