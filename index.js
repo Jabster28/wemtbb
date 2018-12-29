@@ -104,6 +104,11 @@ client.on('message', msg => {
     if (mess[0] == "-makeachannel") {
       if (hasModPerms(msg)) {
         mess.shift()
+        for (var i = 0; i < mess.length; i++) {
+          if (mess[i].charAt(0) == "@") {
+            mess.splice(i, 1)
+          }
+        }
         msg.guild.createChannel(mess.join(" "))
         stuff.channels.push({
           name: mess.join(" "),
