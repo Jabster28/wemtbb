@@ -112,10 +112,10 @@ client.on('message', msg => {
   }
 });
 
-// !ping
+// -ping
 client.on('message', msg => {
   if (isOk(msg)) {
-    if (msg.content.toLowerCase() == "!ping") {
+    if (msg.content.toLowerCase() == "-ping") {
       embed = new Discord.RichEmbed();
       embed.addField("Ping:", client.ping)
       embed.setAuthor(msg.author.username, msg.author.authorURL)
