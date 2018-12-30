@@ -13,6 +13,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const token = process.env.tkn;
 const fs = require('fs');
+const ffmpeg = require("ffmpeg")
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./scores.sqlite');
 var stuff = JSON.parse(fs.readFileSync("./stuff.json"))
