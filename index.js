@@ -214,30 +214,28 @@ client.on('message', msg => {
             'VIEW_CHANNEL': true,
             'READ_MESSAGE_HISTORY': true
           })
-          findChannel(msg.guild, chanid).overwritePermissions(roleFind(msg.guild.roles.array(), 508037227369070603), {
-            'SEND_MESSAGES': true,
-            'VIEW_CHANNEL': true,
-            'READ_MESSAGE_HISTORY': true
-          })
           findChannel(msg.guild, chanid).overwritePermissions(msg.guild.defaultRole, {
             'SEND_MESSAGES': false,
             'VIEW_CHANNEL': false,
             'READ_MESSAGE_HISTORY': false
           })
+          if (msg.guild.id == 507609315079880722) {
+            findChannel(msg.guild, chanid).overwritePermissions(roleFind(msg.guild.roles.array(), 508037227369070603), {
+              'SEND_MESSAGES': true,
+              'VIEW_CHANNEL': true,
+              'READ_MESSAGE_HISTORY': true
+            })
+            findChannel(msg.guild, chanid).overwritePermissions(roleFind(msg.guild.roles.array(), 525686338381676556), {
+              'SEND_MESSAGES': true,
+              'VIEW_CHANNEL': true,
+              'READ_MESSAGE_HISTORY': true
+            })
+          }
           stuff.channels.push({
             name: chan.name,
             role: role.id
-          })
-          msg.delete()
-          embed = new Discord.RichEmbed();
-          embed.setTitle("Successfully created channel")
-          embed.addField("Created Channel:", chan.name)
-          embed.setAuthor(msg.author.username, msg.author.authorURL)
-          embed.setColor("BLUE")
-          embed.setFooter("Made by Jabster28, made for Ramoth")
-          msg.channel.send(embed).then(msg => msg.delete(5000)).then(ree => fs.writeFileSync("./stuff.json", JSON.stringify(stuff)))
-          console.log(mess)
-          console.log(msg.content);
+          }) msg.delete() embed = new Discord.RichEmbed();
+          embed.setTitle("Successfully created channel") embed.addField("Created Channel:", chan.name) embed.setAuthor(msg.author.username, msg.author.authorURL) embed.setColor("BLUE") embed.setFooter("Made by Jabster28, made for Ramoth") msg.channel.send(embed).then(msg => msg.delete(5000)).then(ree => fs.writeFileSync("./stuff.json", JSON.stringify(stuff))) console.log(mess) console.log(msg.content);
 
         })
       }
