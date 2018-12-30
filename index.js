@@ -250,6 +250,18 @@ client.on('message', msg => {
   }
 });
 
+// -leave
+client.on('message', msg => {
+  if (isOk(msg)) {
+    if (msg.content.toLowerCase() == "-leave") {
+      if (guild.me.voiceChannel) {
+          guild.me.voiceChannel.leave()
+          msg.channel.send("Goodbye!")
+      }
+    }
+  }
+});
+
 // -deletechannel
 client.on('message', msg => {
   if (isOk(msg)) {
