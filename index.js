@@ -245,6 +245,28 @@ client.on('message', msg => {
   }
 });
 
+// -roll
+client.on('message', msg => {
+  if (isOk(msg)) {
+    mess = msg.content.toLowerCase().split(" ");
+    if (mess[0] == "-roll") {
+      if (mess[1]) {
+        embed = new Discord.RichEmbed();
+        embed.setAuthor("Is rolling a Dice...", msg.author.avatarURL)
+        embed.setColor("BLUE")
+        embed.addField(("D" + mess[1] + ":"), (generateRandomNumber(mess[1]) + "!"));
+        msg.channel.send(embed)
+      } else {
+        embed = new Discord.RichEmbed();
+        embed.setAuthor("Is rolling a Dice...", msg.author.avatarURL)
+        embed.setColor("BLUE")
+        embed.addField("D6:", (generateRandomNumber(6) + "!"));
+        msg.channel.send(embed)
+      }
+    }
+  }
+});
+
 // Login
 
 client.login(token);
