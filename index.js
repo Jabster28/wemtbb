@@ -129,25 +129,33 @@ client.on('message', msg => {
 // -createrole
 client.on('message', msg => {
   if (isOk(msg)) {
-    mess = msg.content.toLowerCase().split(" ");
-    if (mess[0] == "-createrole") {
-      mess.shift()
-      for (var i = 0; i < mess.length; i++) {
-        if (mess[i].charAt(0) == "<" && mess[i].charAt(1) == "@") {
-          mess.splice(i, 1)
-          i = i - 1
+    if (hasModPerms) {
+      mess = msg.content.toLowerCase().split(" ");
+      if (mess[0] == "-createrole") {
+        mess.shift()
+        for (var i = 0; i < mess.length; i++) {
+          if (mess[i].charAt(0) == "<" && mess[i].charAt(1) == "@") {
+            mess.splice(i, 1)
+            i = i - 1
+          }
         }
+        console.log(mess)
+        console.log(msg.content)
+        msg.guild.createRole({
+          name: mess.join(" "),
+          mentionable: true
+        }).then(role => {
+          for (var i = 0; i < msg.mentions.members.array().length; i++) {
+            msg.mentions.members.array()[i].addRole(role)
+          }
+          stuff.roles.push({
+            name: role.name,
+            id: role.id,
+            users: msg.mentions.members.array()
+          })
+        })
+        fs.writeFileSync("./stuff.json", JSON.stringify(stuff))
       }
-      console.log(mess)
-      console.log(msg.content)
-      msg.guild.createRole({
-        name: mess.join(" "),
-        mentionable: true
-      }).then(role => {
-        for (var i = 0; i < msg.mentions.members.array().length; i++) {
-          msg.mentions.members.array()[i].addRole(role)
-        }
-      })
     }
   }
 });
@@ -167,27 +175,27 @@ client.on('message', msg => {
         }
         role = msg.mentions.roles.array()[0]
         msg.guild.createChannel(mess.join(" ")).then(chan => {
-        chanid = chan.id
-        console.log(chanid)
-        console.log(chan.id)
-        console.log(mess)
-        findChannel(msg.guild, chanid).overwritePermissions(role, {
-          'SEND_MESSAGES': true,
-          'VIEW_CHANNEL': true,
-          'READ_MESSAGE_HISTORY': true
-        })
-        findChannel(msg.guild, chanid).overwritePermissions(msg.guild.defaultRole, {
-          'SEND_MESSAGES': false,
-          'VIEW_CHANNEL': false,
-          'READ_MESSAGE_HISTORY': false
-        })
-        stuff.channels.push({
-          name: mess.join(" "),
-          role: role.name
-        })
-        console.log(mess)
-        console.log(msg.content);
-        fs.writeFileSync("./stuff.json", JSON.stringify(stuff))
+          chanid = chan.id
+          console.log(chanid)
+          console.log(chan.id)
+          console.log(mess)
+          findChannel(msg.guild, chanid).overwritePermissions(role, {
+            'SEND_MESSAGES': true,
+            'VIEW_CHANNEL': true,
+            'READ_MESSAGE_HISTORY': true
+          })
+          findChannel(msg.guild, chanid).overwritePermissions(msg.guild.defaultRole, {
+            'SEND_MESSAGES': false,
+            'VIEW_CHANNEL': false,
+            'READ_MESSAGE_HISTORY': false
+          })
+          stuff.channels.push({
+            name: mess.join(" "),
+            role: role.name
+          })
+          console.log(mess)
+          console.log(msg.content);
+          fs.writeFileSync("./stuff.json", JSON.stringify(stuff))
         })
       }
     }
