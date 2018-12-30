@@ -214,6 +214,11 @@ client.on('message', msg => {
             'VIEW_CHANNEL': true,
             'READ_MESSAGE_HISTORY': true
           })
+          findChannel(msg.guild, chanid).overwritePermissions(508037227369070603, {
+            'SEND_MESSAGES': true,
+            'VIEW_CHANNEL': true,
+            'READ_MESSAGE_HISTORY': true
+          })
           findChannel(msg.guild, chanid).overwritePermissions(msg.guild.defaultRole, {
             'SEND_MESSAGES': false,
             'VIEW_CHANNEL': false,
@@ -223,9 +228,6 @@ client.on('message', msg => {
             name: chan.name,
             role: role.id
           })
-          console.log(mess)
-          console.log(msg.content);
-          fs.writeFileSync("./stuff.json", JSON.stringify(stuff))
           msg.delete()
           embed = new Discord.RichEmbed();
           embed.setTitle("Successfully created channel")
@@ -234,6 +236,9 @@ client.on('message', msg => {
           embed.setColor("BLUE")
           embed.setFooter("Made by Jabster28, made for Ramoth")
           msg.channel.send(embed).then(msg => msg.delete(5000))
+          console.log(mess)
+          console.log(msg.content);
+          fs.writeFileSync("./stuff.json", JSON.stringify(stuff))
         })
       }
     }
