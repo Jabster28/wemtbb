@@ -243,7 +243,7 @@ client.on('message', msg => {
 // -join
 client.on('message', msg => {
   if (isOk(msg)) {
-    mess = msg.content.splice(" ")
+    mess = msg.content.split(" ")
     if (mess[0] == "-join") {
       if (msg.member.voiceChannel) {
         msg.member.voiceChannel.join().then(connection => {
