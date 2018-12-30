@@ -169,6 +169,14 @@ client.on('message', msg => {
             id: role.id,
             users: msg.mentions.members.array()
           })
+          msg.delete()
+          embed = new Discord.RichEmbed();
+          embed.setTitle("Successfully created role")
+          embed.addField("Created Role:", role.arrayObjFindByName)
+          embed.setAuthor(msg.author.username, msg.author.authorURL)
+          embed.setColor("BLUE")
+          embed.setFooter("Made by Jabster28, made for Ramoth")
+          msg.channel.send(embed).then(msg => msg.delete(5000))
         })
         fs.writeFileSync("./stuff.json", JSON.stringify(stuff))
       }
@@ -212,6 +220,14 @@ client.on('message', msg => {
           console.log(mess)
           console.log(msg.content);
           fs.writeFileSync("./stuff.json", JSON.stringify(stuff))
+          msg.delete()
+          embed = new Discord.RichEmbed();
+          embed.setTitle("Successfully created channel")
+          embed.addField("Created Channel:", chan.name)
+          embed.setAuthor(msg.author.username, msg.author.authorURL)
+          embed.setColor("BLUE")
+          embed.setFooter("Made by Jabster28, made for Ramoth")
+          msg.channel.send(embed).then(msg => msg.delete(5000))
         })
       }
     }
