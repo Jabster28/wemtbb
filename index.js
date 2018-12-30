@@ -234,6 +234,21 @@ client.on('message', msg => {
   }
 });
 
+// -join
+client.on('message', msg => {
+  if (isOk(msg)) {
+    if (msg.content.toLowerCase() == "-join") {
+      if (msg.member.voiceChannel) {
+        msg.member.voiceChannel.join()
+        msg.delete()
+        msg.channel.send("Successfully joined the channel").then(mssg => mssg.delete(3000))
+      } else {
+        msg.channel.send("Sorry, but you must be in a Voice Channel to use that! Why not join one?")
+      }
+    }
+  }
+});
+
 // -deletechannel
 client.on('message', msg => {
   if (isOk(msg)) {
