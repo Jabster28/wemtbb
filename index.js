@@ -241,11 +241,13 @@ client.on('message', msg => {
       if (msg.member.voiceChannel) {
         msg.member.voiceChannel.join()
         msg.channel.send("Successfully joined the channel")
-      } else {
+      } else if (!(msg.member.voiceChannel.joinable)) {
+        msg.channel.send("Hmm, I can't access this channel. Please tell the server owner about this")
+      } else
         msg.channel.send("Sorry, but you must be in a Voice Channel to use that! Why not join one?")
-      }
     }
   }
+}
 });
 
 // -deletechannel
