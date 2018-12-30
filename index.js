@@ -31,6 +31,7 @@ function findChannel(guld, channelid) {
     }
   }
 }
+
 function roleFind(array, roleid) {
   for (var i = 0; i < array.length; i++) {
     if (array[i].id == roleid) {
@@ -223,7 +224,19 @@ client.on('message', msg => {
     mess = msg.content.toLowerCase().split(" ");
     if (mess[0] == "-deletechannel") {
       if (hasModPerms(msg)) {
-        roleFind(msg.guild.roles.array(), arrayObjFindByName(stuff.channels, msg.mentions.channels.array()[0].name).role).delete()
+        channame = msg.mentions.channels.array()[0].name
+        role = roleFind(msg.guild.roles.array(), arrayObjFindByName(stuff.channels, msg.mentions.channels.array()[0].name).role)
+        rolename = role.name;
+        role.delete()
+        msg.mentions.channels.array()[0].delete()
+        embed = new Discord.RichEmbed();
+        embed.setTitle("Successfully deleted channel and associated role")
+        embed.addField("Deleted Channel:", channame)
+        embed.addField("Deleted Role:", rolename)
+        embed.setAuthor(msg.author.username, msg.author.authorURL)
+        embed.setColor("BLUE")
+        embed.setFooter("Made by Jabster28, made for Ramoth")
+        msg.channel.send(embed).then(msg => msg.delete(3000))
       }
     }
   }
