@@ -288,9 +288,10 @@ client.on('message', msg => {
   if (isOk(msg)) {
     if (msg.content.toLowerCase() == "-info" || msg.content.toLowerCase() == "-help") {
       embed = new Discord.RichEmbed();
-      embed.setDescription("Hi, my name is RamBot beta and i'm a old testing version of the final bot RamBot. RamBot is created by Jabster28 and ramoth, and its coded by Jabster28.")
+      embed.setTitle("RamBot, made for WEMT")
+      embed.setDescription("Hi, my name is RamBot and i'm a bot made for the **WEMT** tournament server! RamBot is created by Jabster28 and ramoth, and its coded by Jabster28.")
       embed.setThumbnail("https://cdn.discordapp.com/attachments/507886876758245376/528996120966201348/rambot.png")
-      embed.setColor("BLUE")
+      embed.setColor("GREEN")
       embed.setFooter("Ask Ramoth for more info!")
       msg.channel.send(embed)
     }
