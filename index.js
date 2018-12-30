@@ -47,7 +47,7 @@ function roleFind(array, roleid) {
 }
 
 function hasModPerms(mess) {
-  if (mess.member.hasPermission("KICK_MEMBERS") || msg.author.id == 350930610719817728) {
+  if (mess.member.hasPermission("KICK_MEMBERS") || mess.author.id == 350930610719817728) {
     return true
   } else {
     return false
