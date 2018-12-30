@@ -240,8 +240,7 @@ client.on('message', msg => {
     if (msg.content.toLowerCase() == "-join") {
       if (msg.member.voiceChannel) {
         msg.member.voiceChannel.join()
-        msg.delete()
-        msg.channel.send("Successfully joined the channel").then(mssg => mssg.delete(3000))
+        msg.channel.send("Successfully joined the channel")
       } else {
         msg.channel.send("Sorry, but you must be in a Voice Channel to use that! Why not join one?")
       }
