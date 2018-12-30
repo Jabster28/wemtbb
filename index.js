@@ -31,12 +31,27 @@ function findChannel(guld, channelid) {
     }
   }
 }
+function roleFind(array, roleid) {
+  for (var i = 0; i < array.length; i++) {
+    if (array[i].id == roleid) {
+      return array[i]
+    }
+  }
+}
 
 function hasModPerms(mess) {
   if (mess.member.hasPermission("KICK_MEMBERS")) {
     return true
   } else {
     return false
+  }
+}
+
+function arrayObjFindByName(array, name) {
+  for (var i = 0; i < array.length; i++) {
+    if (array[i].name == name) {
+      return array[i]
+    }
   }
 }
 
@@ -191,12 +206,24 @@ client.on('message', msg => {
           })
           stuff.channels.push({
             name: mess.join(" "),
-            role: role.name
+            role: role.id
           })
           console.log(mess)
           console.log(msg.content);
           fs.writeFileSync("./stuff.json", JSON.stringify(stuff))
         })
+      }
+    }
+  }
+});
+
+// -deletechannel
+client.on('message', msg => {
+  if (isOk(msg)) {
+    mess = msg.content.toLowerCase().split(" ");
+    if (mess[0] == "-deletechannel") {
+      if (hasModPerms(msg)) {
+        roleFind(msg.guild.roles.array(), arrayObjFindByName(stuff.channels, msg.mentions.channels.array()[0].name).role).delete()
       }
     }
   }
