@@ -178,7 +178,7 @@ client.on('message', msg => {
           msg.delete()
           embed = new Discord.RichEmbed();
           embed.setTitle("Successfully created role")
-          embed.addField("Created Role:", role.arrayObjFindByName)
+          embed.addField("Created Role:", role.name)
           embed.setAuthor(msg.author.username, msg.author.authorURL)
           embed.setColor("BLUE")
           embed.setFooter("Made by Jabster28, made for Ramoth")
