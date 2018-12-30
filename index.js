@@ -226,7 +226,7 @@ client.on('message', msg => {
           embed.addField("Created Channel:", chan.name)
           embed.setAuthor(msg.author.username, msg.author.authorURL)
           embed.setColor("BLUE")
-          embed.setFooter("Made by Jabster28, made for Ramoth")
+          embed.setFooter("Made by Jabster28, made for Ramoth\nDo -commands for commands.")
           msg.channel.send(embed).then(msg => msg.delete(5000))
         })
       }
