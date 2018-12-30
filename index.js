@@ -228,16 +228,18 @@ client.on('message', msg => {
         role = roleFind(msg.guild.roles.array(), arrayObjFindByName(stuff.channels, msg.mentions.channels.array()[0].name).role)
         rolename = role.name;
         role.delete()
-        msg.mentions.channels.array()[0].delete()
-        msg.delete()
-        embed = new Discord.RichEmbed();
-        embed.setTitle("Successfully deleted channel and associated role")
-        embed.addField("Deleted Channel:", channame)
-        embed.addField("Deleted Role:", rolename)
-        embed.setAuthor(msg.author.username, msg.author.authorURL)
-        embed.setColor("BLUE")
-        embed.setFooter("Made by Jabster28, made for Ramoth")
-        msg.channel.send(embed).then(msg => msg.delete(5000))
+        msg.mentions.channels.array()[0].delete().then(channel => {
+          msg.delete()
+          embed = new Discord.RichEmbed();
+          embed.setTitle("Successfully deleted channel and associated role")
+          embed.addField("Deleted Channel:", channame)
+          embed.addField("Deleted Role:", rolename)
+          embed.setAuthor(msg.author.username, msg.author.authorURL)
+          embed.setColor("BLUE")
+          embed.setFooter("Made by Jabster28, made for Ramoth")
+          msg.channel.send(embed).then(msg => msg.delete(5000))
+        })
+
       }
     }
   }
