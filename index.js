@@ -237,7 +237,7 @@ client.on('message', msg => {
         embed.setAuthor(msg.author.username, msg.author.authorURL)
         embed.setColor("BLUE")
         embed.setFooter("Made by Jabster28, made for Ramoth")
-        msg.channel.send(embed).then(msg => msg.delete(3000))
+        msg.channel.send(embed).then(msg => msg.delete(5000))
       }
     }
   }
