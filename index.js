@@ -176,7 +176,6 @@ client.on('message', msg => {
           'VIEW_CHANNEL': true,
           'READ_MESSAGE_HISTORY': true
         })
-        })
         findChannel(msg.guild, chanid).overwritePermissions(msg.guild.defaultRole, {
           'SEND_MESSAGES': false,
           'VIEW_CHANNEL': false,
@@ -189,6 +188,7 @@ client.on('message', msg => {
         console.log(mess)
         console.log(msg.content);
         fs.writeFileSync("./stuff.json", JSON.stringify(stuff))
+        })
       }
     }
   }
