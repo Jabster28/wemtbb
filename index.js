@@ -166,7 +166,7 @@ client.on('message', msg => {
           }
         }
         role = msg.mentions.roles.array()[0].name
-        msg.guild.createChannel(mess.join(" ")).then(channel => chan = channel)
+        msg.guild.createChannel(mess.join(" ")).then(chan => {
         chanid = chan.id
         console.log(chanid)
         console.log(chan.id)
@@ -175,6 +175,7 @@ client.on('message', msg => {
           'SEND_MESSAGES': true,
           'VIEW_CHANNEL': true,
           'READ_MESSAGE_HISTORY': true
+        })
         })
         findChannel(msg.guild, chanid).overwritePermissions(msg.guild.defaultRole, {
           'SEND_MESSAGES': false,
