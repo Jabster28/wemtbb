@@ -250,14 +250,15 @@ client.on('message', msg => {
           const stream = ytdl(mess[1], {
             filter: 'audioonly'
           });
-        });
-        const dispatcher = connection.playStream(stream, streamOptions);
-        msg.channel.send("Successfully joined the channel")
+          const dispatcher = connection.playStream(stream, streamOptions);
+          msg.channel.send("Successfully joined the channel")
+        })
       } else if (!(msg.member.voiceChannel.joinable)) {
         msg.channel.send("Hmm, I can't access this channel. Please tell the server owner about this")
       } else
         msg.channel.send("Sorry, but you must be in a Voice Channel to use that! Why not join one?")
-    }
+    };
+
   }
 });
 
