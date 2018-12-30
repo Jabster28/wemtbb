@@ -165,7 +165,7 @@ client.on('message', msg => {
             i = i - 1
           }
         }
-        role = msg.mentions.roles.array()[0].name
+        role = msg.mentions.roles.array()[0]
         msg.guild.createChannel(mess.join(" ")).then(chan => {
         chanid = chan.id
         console.log(chanid)
@@ -183,7 +183,7 @@ client.on('message', msg => {
         })
         stuff.channels.push({
           name: mess.join(" "),
-          role: role
+          role: role.name
         })
         console.log(mess)
         console.log(msg.content);
