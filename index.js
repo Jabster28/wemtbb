@@ -247,7 +247,6 @@ client.on('message', msg => {
         msg.channel.send("Sorry, but you must be in a Voice Channel to use that! Why not join one?")
     }
   }
-}
 });
 
 // -deletechannel
