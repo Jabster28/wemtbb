@@ -205,7 +205,7 @@ client.on('message', msg => {
             'READ_MESSAGE_HISTORY': false
           })
           stuff.channels.push({
-            name: mess.join(" "),
+            name: chan.name,
             role: role.id
           })
           console.log(mess)
