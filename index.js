@@ -229,6 +229,7 @@ client.on('message', msg => {
         rolename = role.name;
         role.delete()
         msg.mentions.channels.array()[0].delete()
+        msg.delete()
         embed = new Discord.RichEmbed();
         embed.setTitle("Successfully deleted channel and associated role")
         embed.addField("Deleted Channel:", channame)
