@@ -266,8 +266,8 @@ client.on('message', msg => {
 client.on('message', msg => {
   if (isOk(msg)) {
     if (msg.content.toLowerCase() == "-leave") {
-      if (guild.me.voiceChannel) {
-        guild.me.voiceChannel.leave()
+      if (msg.guild.me.voiceChannel) {
+        msg.guild.me.voiceChannel.leave()
         msg.channel.send("Goodbye!")
       }
     }
