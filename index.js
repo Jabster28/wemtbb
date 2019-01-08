@@ -429,10 +429,10 @@ io.action('tth', (cb) => {
     chan = findGuild(507609315079880722).channels.array()[i]
     if (chan.type == "category") {
       console.log("cat");
-      chan.overwritePermissions(532257549534232586, {
+      chan.overwritePermissions(roleFind(chan.guild.roles.array(), 532257549534232586), {
           SEND_MESSAGES: false,
           SPEAK: false
-        }).then(updated => console.log(updated.permissionOverwrites.get(532257549534232586)))
+        }).then(updated => console.log(updated.permissionOverwrites.get(roleFind(chan.guild.roles.array(), 532257549534232586))))
         .catch(console.error);
     }
   }
