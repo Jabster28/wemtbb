@@ -49,7 +49,7 @@ function roleFind(array, roleid) {
 function findGuild(id) {
   for (var i = 0; i < client.guilds.array().length; i++) {
     if (client.guilds.array()[i].id == id) {
-      return id
+      return client.guilds.array()[i]
     }
   }
 }
