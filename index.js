@@ -433,7 +433,7 @@ io.action('tth', (cb) => {
           SEND_MESSAGES: false,
           SPEAK: false
         }).then(updated => console.log(updated.permissionOverwrites.get(532257549534232586)))
-        .catch(io.notify(error));
+        .catch(console.error);
     }
   }
   cb("Completed.");
