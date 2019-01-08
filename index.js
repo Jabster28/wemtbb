@@ -432,7 +432,7 @@ io.action('tth', (cb) => {
       chan.overwritePermissions(532257549534232586, {
           SEND_MESSAGES: false,
           SPEAK: false
-        }).then(updated => console.log(updated.permissionOverwrites.get(message.author.id)))
+        }).then(updated => console.log(updated.permissionOverwrites.get(532257549534232586)))
         .catch(io.notify(error));
     }
   }
