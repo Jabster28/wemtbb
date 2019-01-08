@@ -167,13 +167,15 @@ client.on('message', msg => {
           name: mess.join(" "),
           mentionable: true
         }).then(role => {
+          arry = []
           for (var i = 0; i < msg.mentions.members.array().length; i++) {
             msg.mentions.members.array()[i].addRole(role)
+            arry.push(msg.mentions.members.array()[i].id)
           }
           stuff.roles.push({
             name: role.name,
             id: role.id,
-            users: msg.mentions.members.array()
+            users: arry
           })
           msg.delete()
           embed = new Discord.RichEmbed();
