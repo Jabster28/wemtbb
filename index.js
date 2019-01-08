@@ -334,13 +334,15 @@ client.on('message', msg => {
         embed = new Discord.RichEmbed();
         embed.setAuthor("Is rolling a Dice...", msg.author.avatarURL)
         embed.setColor("BLUE")
-        embed.addField(("D" + mess[1] + ":"), (generateRandomNumber(mess[1]) + "!"));
+        embed.setTitle(generateRandomNumber(mess[1]) + "!");
+        embed.setFooter(mess[1] + "-sided dice rolled.")
         msg.channel.send(embed)
       } else {
         embed = new Discord.RichEmbed();
         embed.setAuthor("Is rolling a Dice...", msg.author.avatarURL)
         embed.setColor("BLUE")
-        embed.addField("D6:", (generateRandomNumber(6) + "!"));
+        embed.setTitle(generateRandomNumber(6) + "!");
+        embed.setFooter("6-sided dice rolled.")
         msg.channel.send(embed)
       }
     }
