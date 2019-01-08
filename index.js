@@ -308,19 +308,18 @@ client.on('message', msg => {
             embed.setFooter("Made by Jabster28, made for Ramoth")
             msg.channel.send(embed).then(msg => msg.delete(5000))
           })
-
+        } else {
+          msg.mentions.channels.array()[0].delete().then(channel => {
+            msg.delete()
+            embed = new Discord.RichEmbed();
+            embed.setTitle("Successfully deleted channel")
+            embed.addField("Deleted Channel:", channame)
+            embed.setAuthor(msg.author.username, msg.author.authorURL)
+            embed.setColor("BLUE")
+            embed.setFooter("Made by Jabster28, made for Ramoth")
+            msg.channel.send(embed).then(msg => msg.delete(5000))
+          })
         }
-      } else {
-        msg.mentions.channels.array()[0].delete().then(channel => {
-          msg.delete()
-          embed = new Discord.RichEmbed();
-          embed.setTitle("Successfully deleted channel")
-          embed.addField("Deleted Channel:", channame)
-          embed.setAuthor(msg.author.username, msg.author.authorURL)
-          embed.setColor("BLUE")
-          embed.setFooter("Made by Jabster28, made for Ramoth")
-          msg.channel.send(embed).then(msg => msg.delete(5000))
-        })
       }
     }
   }
