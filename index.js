@@ -424,9 +424,9 @@ io.action('Logging Test', (cb) => {
 });
 
 io.action('tth', (cb) => {
-  for (var i = 0; i < findGuild(507609315079880722).channels.length; i++) {
+  for (var i = 0; i < findGuild(507609315079880722).channels.array().length; i++) {
     console.log("for loop");
-    chan = findGuild(507609315079880722).channels[i]
+    chan = findGuild(507609315079880722).channels.array()[i]
     if (chan.type == "category") {
       console.log("cat");
       chan.overwritePermissions(532257549534232586, {
