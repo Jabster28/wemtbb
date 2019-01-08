@@ -145,7 +145,7 @@ client.on('message', msg => {
 client.on('message', msg => {
   if (isOk(msg)) {
     if (hasModPerms(msg))
-    mess = msg.content.toLowerCase().split(" ");
+      mess = msg.content.toLowerCase().split(" ");
     if (mess[0] == "-mute") {
       if (msg.mentions.members.array()) {
         msg.mentions.members.array()[0].addRole(roleFind(msg.guild.roles.array(), 532257549534232586))
@@ -158,7 +158,7 @@ client.on('message', msg => {
 client.on('message', msg => {
   if (isOk(msg)) {
     if (hasModPerms(msg))
-    mess = msg.content.toLowerCase().split(" ");
+      mess = msg.content.toLowerCase().split(" ");
     if (mess[0] == "-unmute") {
       if (msg.mentions.members.array()) {
         msg.mentions.members.array()[0].removeRole(roleFind(msg.guild.roles.array(), 532257549534232586))
@@ -166,6 +166,7 @@ client.on('message', msg => {
     }
   }
 });
+
 // -ping
 client.on('message', msg => {
   if (isOk(msg)) {
