@@ -153,6 +153,19 @@ client.on('message', msg => {
     }
   }
 });
+
+// -unmute
+client.on('message', msg => {
+  if (isOk(msg)) {
+    if (hasModPerms(msg))
+    mess = msg.content.toLowerCase().split(" ");
+    if (mess[0] == "-unmute") {
+      if (msg.mentions.members.array()) {
+        msg.mentions.members.array()[0].removeRole(roleFind(msg.guild.roles.array(), 532257549534232586))
+      }
+    }
+  }
+});
 // -ping
 client.on('message', msg => {
   if (isOk(msg)) {
