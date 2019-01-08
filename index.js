@@ -293,7 +293,7 @@ client.on('message', msg => {
     if (mess[0] == "-deletechannel") {
       if (hasModPerms(msg)) {
         channame = msg.mentions.channels.array()[0].name
-        if (roleFind(msg.guild.roles.array(), arrayObjFindByName(stuff.channels, msg.mentions.channels.array()[0].name).role)) {
+        if (arrayObjFindByName(stuff.channels, msg.mentions.channels.array()[0].name)) {
           role = roleFind(msg.guild.roles.array(), arrayObjFindByName(stuff.channels, msg.mentions.channels.array()[0].name).role)
           rolename = role.name;
           role.delete()
