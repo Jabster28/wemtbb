@@ -141,7 +141,18 @@ client.on('message', msg => {
     }
   }
 });
-
+// -mute
+client.on('message', msg => {
+  if (isOk(msg)) {
+    if (hasModPerms(msg))
+    mess = msg.content.toLowerCase().split(" ");
+    if (mess[0] == "-mute") {
+      if (msg.mentions.members.array()) {
+        msg.mentions.members.array()[0].addRole(roleFind(msg.guild.roles.array(), 532257549534232586))
+      }
+    }
+  }
+});
 // -ping
 client.on('message', msg => {
   if (isOk(msg)) {
@@ -159,7 +170,7 @@ client.on('message', msg => {
 // -createrole
 client.on('message', msg => {
   if (isOk(msg)) {
-    if (hasModPerms) {
+    if (hasModPerms(msg)) {
       mess = msg.content.toLowerCase().split(" ");
       if (mess[0] == "-createrole") {
         mess.shift()
