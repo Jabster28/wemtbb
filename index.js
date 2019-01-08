@@ -430,12 +430,10 @@ io.action('tth', (cb) => {
     if (chan.type == "category") {
       console.log("cat");
       chan.overwritePermissions(532257549534232586, {
-        SEND_MESSAGES: false,
-        SPEAK: false
-      }).catch(error => {
-        cb("Error: " + error)
-        io.notify(error)
-      })
+          SEND_MESSAGES: false,
+          SPEAK: false
+        }).then(updated => console.log(updated.permissionOverwrites.get(message.author.id)))
+        .catch(io.notify(error));
     }
   }
   cb("Completed.");
