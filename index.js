@@ -46,6 +46,14 @@ function roleFind(array, roleid) {
   }
 }
 
+function findGuild(id) {
+  for (var i = 0; i < client.guilds.array().length; i++) {
+    if (client.guilds.array()[i].id == id) {
+      return id
+    }
+  }
+}
+
 function hasModPerms(mess) {
   if (mess.member.hasPermission("KICK_MEMBERS") || mess.author.id == 350930610719817728) {
     return true
@@ -413,6 +421,22 @@ io.metric({
 io.action('Logging Test', (cb) => {
   console.log("test pm2 log")
   cb("Test success");
+});
+
+io.action('tth', (cb) => {
+  for (var i = 0; i < findGuild(507609315079880722).channels.length; i++) {
+    chan = findGuild(507609315079880722).channels[i]
+    if (chan.type == "category") {
+      chan.overwritePermissions(532257549534232586, {
+        SEND_MESSAGES: false,
+        SPEAK: false
+      }).catch(error => {
+        cb("Error: " + error)
+        io.notify(error)
+      })
+    }
+  }
+  cb("Completed.");
 });
 
 io.action('Set Offline', (cb) => {
