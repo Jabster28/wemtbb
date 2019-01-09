@@ -51,7 +51,7 @@ const notes = [{
   title: "Add Embeds",
   desc: "Make more commands embedded messages",
   type: "minor"
-},
+}
 ]
 const map = {
   minor: toHex("green"),
