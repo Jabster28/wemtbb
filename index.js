@@ -23,6 +23,36 @@ const SQLite = require("better-sqlite3");
 const sql = new SQLite('./scores.sqlite');
 var stuff = JSON.parse(fs.readFileSync("./stuff.json"))
 const toHex = require("colornames")
+const notes = [{
+  title: "Command List",
+  desc: "Add a command list (-commands) for people new with the bot",
+  type: "addition"
+}, {
+  title: "Kick",
+  desc: "Make a kick command (-kick) for removing members",
+  type: "addition"
+}, {
+  title: "Ban",
+  desc: "Make a ban command (-ban) for pernamently removing members",
+  type: "addition"
+}, {
+  title: "Fun Command",
+  desc: "Add stuff (-roll, -gamble, -8ball) for entertainment",
+  type: "addition"
+}, {
+  title: "Economy",
+  desc: "Economy life. like working and getting money and viewing account and balance and daily rewards and store to buy stuff.",
+  type: "addition"
+}, {
+  title: "-deletechannel",
+  desc: "Fix errors with -deletechannel",
+  type: "moderate"
+}, {
+  title: "Add Embeds",
+  desc: "Make more commands embedded messages",
+  type: "minor"
+},
+]
 const map = {
   minor: toHex("green"),
   moderate: toHex("orange"),
@@ -409,13 +439,14 @@ client.on('message', msg => {
 client.on('message', msg => {
   if (isOk(msg)) {
     if (msg.content.toLowerCase() == "-devnotes") {
-      for (var i = 0; i < stuff.verNotesIssues.length; i++) {
-        note = stuff.verNotesIssues[i]
+      for (var i = 0; i < notes.length; i++) {
+        note = notes[i]
         embed = new Discord.RichEmbed();
         embed.setTitle(note.title)
         embed.setDescription(note.desc)
         embed.setAuthor(client.user.username, client.user.authorURL)
         embed.setColor(map[note.type])
+        embed.setFooter(type)
         msg.channel.send(embed)
       }
     }
