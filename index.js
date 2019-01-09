@@ -9,12 +9,6 @@ io.init({
     }
   }
 })
-const map = {
-  minor: toHex("green"),
-  moderate: toHex("orange"),
-  major: toHex("salmon"),
-  bug: toHex("firebrick"),
-}
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const token = process.env.tkn;
@@ -28,7 +22,14 @@ const ffmpeg = require("ffmpeg")
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./scores.sqlite');
 var stuff = JSON.parse(fs.readFileSync("./stuff.json"))
-
+const toHex = require("colornames")
+const map = {
+  minor: toHex("green"),
+  moderate: toHex("orange"),
+  major: toHex("salmon"),
+  bug: toHex("firebrick"),
+  addition: toHex("turqoise")
+}
 // Functions
 
 function generateRandomNumber(max) {
@@ -414,7 +415,7 @@ client.on('message', msg => {
         embed.setTitle(note.title)
         embed.setDescription(note.desc)
         embed.setAuthor(client.user.username, client.user.authorURL)
-        embed.setColor(map[note.typr])
+        embed.setColor(map[note.type])
         msg.channel.send(embed)
       }
     }
