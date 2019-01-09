@@ -447,7 +447,7 @@ client.on('message', msg => {
         embed.setTitle(note.title)
         embed.setDescription(note.desc)
         embed.setColor(map[note.type])
-        embed.setFooter(type)
+        embed.setFooter(note.type)
         msg.channel.send(embed)
       }
     }
