@@ -28,7 +28,7 @@ const map = {
   moderate: toHex("orange"),
   major: toHex("salmon"),
   bug: toHex("firebrick"),
-  addition: toHex("turqoise")
+  addition: toHex("blue")
 }
 // Functions
 
