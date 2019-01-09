@@ -9,6 +9,12 @@ io.init({
     }
   }
 })
+const map = {
+  minor: toHex("green"),
+  moderate: toHex("orange"),
+  major: toHex("salmon"),
+  bug: toHex("firebrick"),
+}
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const token = process.env.tkn;
@@ -395,6 +401,22 @@ client.on('message', msg => {
       embed.setColor("GREEN")
       embed.setFooter("Ask Ramoth#3304 for more info!\nDo -commands for commands")
       msg.channel.send(embed)
+    }
+  }
+});
+// !devnotes
+client.on('message', msg => {
+  if (isOk(msg)) {
+    if (msg.content.toLowerCase() == "!devnotes") {
+      for (var i = 0; i < stuff.verNotesIssues.length; i++) {
+        note = stuff.verNotesIssues[i]
+        embed = new Discord.RichEmbed();
+        embed.setTitle(note.title)
+        embed.setDescription(note.desc)
+        embed.setAuthor(client.user.username, client.user.authorURL)
+        embed.setColor(map[note.typr])
+        msg.channel.send(embed)
+      }
     }
   }
 });
