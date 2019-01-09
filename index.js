@@ -405,10 +405,10 @@ client.on('message', msg => {
     }
   }
 });
-// !devnotes
+// -devnotes
 client.on('message', msg => {
   if (isOk(msg)) {
-    if (msg.content.toLowerCase() == "!devnotes") {
+    if (msg.content.toLowerCase() == "-devnotes") {
       for (var i = 0; i < stuff.verNotesIssues.length; i++) {
         note = stuff.verNotesIssues[i]
         embed = new Discord.RichEmbed();
