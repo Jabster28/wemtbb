@@ -439,12 +439,13 @@ client.on('message', msg => {
 client.on('message', msg => {
   if (isOk(msg)) {
     if (msg.content.toLowerCase() == "-devnotes") {
+      console.log("devnotes");
       for (var i = 0; i < notes.length; i++) {
+        console.log("for loop");
         note = notes[i]
         embed = new Discord.RichEmbed();
         embed.setTitle(note.title)
         embed.setDescription(note.desc)
-        embed.setAuthor(client.user.username, client.user.authorURL)
         embed.setColor(map[note.type])
         embed.setFooter(type)
         msg.channel.send(embed)
