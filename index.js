@@ -242,6 +242,8 @@ client.on('message', msg => {
           name: mess[0],
           mentionable: true
         })
+        console.log(role.name)
+        console.log(role.id)
           console.log(".then");
           arry = []
           for (var i = 0; i < msg.mentions.members.array().length; i++) {
