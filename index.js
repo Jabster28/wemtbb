@@ -51,6 +51,10 @@ const notes = [{
   title: "Add Embeds",
   desc: "Make more commands embedded messages",
   type: "minor"
+}, {
+  title:"Implement the #logs and #removal-logs",
+  desc: "u know what i mean lol",
+  type: "addition"
 }
 ]
 const map = {
@@ -237,17 +241,20 @@ client.on('message', msg => {
           name: mess.join(" "),
           mentionable: true
         }).then(role => {
+          console.log(".then");
           arry = []
           for (var i = 0; i < msg.mentions.members.array().length; i++) {
             msg.mentions.members.array()[i].addRole(role)
             arry.push(msg.mentions.members.array()[i].id)
           }
+          console.log("push");
           stuff.roles.push({
             name: role.name,
             id: role.id,
             users: arry
           })
           msg.delete()
+          console.log("start embed");
           embed = new Discord.RichEmbed();
           embed.setTitle("Successfully created role")
           embed.addField("Created Role:", role.name)
@@ -255,6 +262,7 @@ client.on('message', msg => {
           embed.setColor("BLUE")
           embed.setFooter("Made by Jabster28, made for Ramoth")
           msg.channel.send(embed).then(msg => msg.delete(5000))
+          console.log("sent");
         })
         fs.writeFileSync("./stuff.json", JSON.stringify(stuff))
       }
