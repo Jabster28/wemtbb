@@ -52,11 +52,10 @@ const notes = [{
   desc: "Make more commands embedded messages",
   type: "minor"
 }, {
-  title:"Implement the #logs and #removal-logs",
+  title: "Implement the #logs and #removal-logs",
   desc: "u know what i mean lol",
   type: "addition"
-}
-]
+}]
 const map = {
   minor: toHex("green"),
   moderate: toHex("orange"),
@@ -238,12 +237,12 @@ client.on('message', msg => {
         console.log(mess)
         console.log(msg.content)
         if ((mess.length == 1)) {
-        msg.guild.createRole({
-          name: mess[0],
-          mentionable: true
-        }).then(role => {
-          console.log(role.name)
-          console.log(role.id)
+          msg.guild.createRole({
+            name: mess[0],
+            mentionable: true
+          }).then(role => {
+            console.log(role.name)
+            console.log(role.id)
             console.log(".then");
             arry = []
             for (var i = 0; i < msg.mentions.members.array().length; i++) {
@@ -266,36 +265,36 @@ client.on('message', msg => {
             embed.setFooter("Made by Jabster28, made for Ramoth")
             msg.channel.send(embed).then(msg => msg.delete(5000))
             console.log("sent");
-        })
-      } else {
-        msg.guild.createRole({
-          name: mess.join(" "),
-          mentionable: true
-        }).then(role => {
-          console.log(".then");
-          arry = []
-          for (var i = 0; i < msg.mentions.members.array().length; i++) {
-            msg.mentions.members.array()[i].addRole(role.id)
-            arry.push(msg.mentions.members.array()[i].id)
-          }
-          console.log("push");
-          stuff.roles.push({
-            name: role.name,
-            id: role.id,
-            users: arry
-          })
-          msg.delete()
-          console.log("start embed");
-          embed = new Discord.RichEmbed();
-          embed.setTitle("Successfully created role")
-          embed.addField("Created Role:", role.name)
-          embed.setAuthor(msg.author.username, msg.author.authorURL)
-          embed.setColor("BLUE")
-          embed.setFooter("Made by Jabster28, made for Ramoth")
-          msg.channel.send(embed).then(msg => msg.delete(5000))
-          console.log("sent");
-        }).catch(console.error)
-      }
+          }).catch(console.error);
+        } else {
+          msg.guild.createRole({
+            name: mess.join(" "),
+            mentionable: true
+          }).then(role => {
+            console.log(".then");
+            arry = []
+            for (var i = 0; i < msg.mentions.members.array().length; i++) {
+              msg.mentions.members.array()[i].addRole(role.id)
+              arry.push(msg.mentions.members.array()[i].id)
+            }
+            console.log("push");
+            stuff.roles.push({
+              name: role.name,
+              id: role.id,
+              users: arry
+            })
+            msg.delete()
+            console.log("start embed");
+            embed = new Discord.RichEmbed();
+            embed.setTitle("Successfully created role")
+            embed.addField("Created Role:", role.name)
+            embed.setAuthor(msg.author.username, msg.author.authorURL)
+            embed.setColor("BLUE")
+            embed.setFooter("Made by Jabster28, made for Ramoth")
+            msg.channel.send(embed).then(msg => msg.delete(5000))
+            console.log("sent");
+          }).catch(console.error);
+        }
         fs.writeFileSync("./stuff.json", JSON.stringify(stuff))
       }
     }
