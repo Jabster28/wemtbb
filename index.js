@@ -264,7 +264,7 @@ client.on('message', msg => {
           embed.setFooter("Made by Jabster28, made for Ramoth")
           msg.channel.send(embed).then(msg => msg.delete(5000))
           console.log("sent");
-        })
+        }).catch(console.error)
       } else {
         msg.guild.createRole({
           name: mess.join(" "),
@@ -292,7 +292,7 @@ client.on('message', msg => {
           embed.setFooter("Made by Jabster28, made for Ramoth")
           msg.channel.send(embed).then(msg => msg.delete(5000))
           console.log("sent");
-        })
+        }).catch(console.error)
       }
         fs.writeFileSync("./stuff.json", JSON.stringify(stuff))
       }
