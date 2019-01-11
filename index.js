@@ -238,10 +238,10 @@ client.on('message', msg => {
         console.log(mess)
         console.log(msg.content)
         if ((mess.length == 1)) {
-        msg.guild.createRole({
+        var role = msg.guild.createRole({
           name: mess[0],
           mentionable: true
-        }).then(role => {
+        })
           console.log(".then");
           arry = []
           for (var i = 0; i < msg.mentions.members.array().length; i++) {
@@ -264,7 +264,7 @@ client.on('message', msg => {
           embed.setFooter("Made by Jabster28, made for Ramoth")
           msg.channel.send(embed).then(msg => msg.delete(5000))
           console.log("sent");
-        }).catch(console.error)
+
       } else {
         msg.guild.createRole({
           name: mess.join(" "),
