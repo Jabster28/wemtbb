@@ -238,35 +238,35 @@ client.on('message', msg => {
         console.log(mess)
         console.log(msg.content)
         if ((mess.length == 1)) {
-        var role = msg.guild.createRole({
+        msg.guild.createRole({
           name: mess[0],
           mentionable: true
+        }).then(role => {
+          console.log(role.name)
+          console.log(role.id)
+            console.log(".then");
+            arry = []
+            for (var i = 0; i < msg.mentions.members.array().length; i++) {
+              msg.mentions.members.array()[i].addRole(role.id)
+              arry.push(msg.mentions.members.array()[i].id)
+            }
+            console.log("push");
+            stuff.roles.push({
+              name: role.name,
+              id: role.id,
+              users: arry
+            })
+            msg.delete()
+            console.log("start embed");
+            embed = new Discord.RichEmbed();
+            embed.setTitle("Successfully created role")
+            embed.addField("Created Role:", role.name)
+            embed.setAuthor(msg.author.username, msg.author.authorURL)
+            embed.setColor("BLUE")
+            embed.setFooter("Made by Jabster28, made for Ramoth")
+            msg.channel.send(embed).then(msg => msg.delete(5000))
+            console.log("sent");
         })
-        console.log(role.name)
-        console.log(role.id)
-          console.log(".then");
-          arry = []
-          for (var i = 0; i < msg.mentions.members.array().length; i++) {
-            msg.mentions.members.array()[i].addRole(role)
-            arry.push(msg.mentions.members.array()[i].id)
-          }
-          console.log("push");
-          stuff.roles.push({
-            name: role.name,
-            id: role.id,
-            users: arry
-          })
-          msg.delete()
-          console.log("start embed");
-          embed = new Discord.RichEmbed();
-          embed.setTitle("Successfully created role")
-          embed.addField("Created Role:", role.name)
-          embed.setAuthor(msg.author.username, msg.author.authorURL)
-          embed.setColor("BLUE")
-          embed.setFooter("Made by Jabster28, made for Ramoth")
-          msg.channel.send(embed).then(msg => msg.delete(5000))
-          console.log("sent");
-
       } else {
         msg.guild.createRole({
           name: mess.join(" "),
@@ -275,7 +275,7 @@ client.on('message', msg => {
           console.log(".then");
           arry = []
           for (var i = 0; i < msg.mentions.members.array().length; i++) {
-            msg.mentions.members.array()[i].addRole(role)
+            msg.mentions.members.array()[i].addRole(role.id)
             arry.push(msg.mentions.members.array()[i].id)
           }
           console.log("push");
