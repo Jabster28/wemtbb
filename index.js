@@ -168,7 +168,8 @@ client.on('message', msg => {
         if (err) console.log(err);
         embed = new Discord.RichEmbed();
         embed.setTitle("Weather for " + mess)
-        embed.setDescription(JSON.stringify(result, null, 2))
+        result = JSON.stringify(result, null, 2)
+        embed.addField("Current Temperature: ", result.current.temperature)
         embed.setAuthor(msg.author.username, msg.author.authorURL)
         embed.setColor("BLUE")
         msg.channel.send(embed)
