@@ -164,11 +164,12 @@ client.on('message', msg => {
       weather.find({
         search: mess,
         degreeType: 'C'
-      }, function(err, result) {
+      }, async function(err, result) {
         if (err) console.log(err);
         embed = new Discord.RichEmbed();
         embed.setTitle("Weather for " + mess)
         result = JSON.stringify(result, null, 2)
+        console.log(result);
         embed.addField("Current Temperature: ", result.current.temperature)
         embed.setAuthor(msg.author.username, msg.author.authorURL)
         embed.setColor("BLUE")
