@@ -14,6 +14,7 @@ const client = new Discord.Client();
 const token = process.env.tkn;
 const fs = require('fs');
 const ytdl = require('ytdl-core');
+var weather = require('weather-js');
 const streamOptions = {
   seek: 0,
   volume: 1
@@ -153,7 +154,27 @@ client.on('message', msg => {
     }
   }
 });
-
+// -weather
+client.on('message', msg => {
+  if (isOk(msg)) {
+    mess = msg.content.toLowerCase().split(" ");
+    if (mess[0] == "-weather") {
+      mess = mess.shift()
+      weather.find({
+        search: mess.join(" "),
+        degreeType: 'C'
+      }, function(err, result) {
+        if (err) console.log(err);
+        embed = new Discord.RichEmbed();
+        embed.setTitle("Weather for " + mess.join(" "))
+        embed.setDescription(JSON.stringify(result, null, 2))
+        embed.setAuthor(msg.author.username, msg.author.authorURL)
+        embed.setColor("BLUE")
+        msg.channel.send(embed)
+      });
+    }
+  }
+});
 // -mod
 client.on('message', msg => {
   if (isOk(msg)) {
