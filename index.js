@@ -159,14 +159,15 @@ client.on('message', msg => {
   if (isOk(msg)) {
     mess = msg.content.toLowerCase().split(" ");
     if (mess[0] == "-weather") {
-      mess = mess.shift()
+      mess.shift()
+      mess.join(" ")
       weather.find({
-        search: mess.join(" "),
+        search: mess,
         degreeType: 'C'
       }, function(err, result) {
         if (err) console.log(err);
         embed = new Discord.RichEmbed();
-        embed.setTitle("Weather for " + mess.join(" "))
+        embed.setTitle("Weather for " + mess)
         embed.setDescription(JSON.stringify(result, null, 2))
         embed.setAuthor(msg.author.username, msg.author.authorURL)
         embed.setColor("BLUE")
