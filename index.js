@@ -160,9 +160,8 @@ client.on('message', msg => {
     mess = msg.content.toLowerCase().split(" ");
     if (mess[0] == "-weather") {
       mess.shift()
-      mess.join(" ")
       weather.find({
-        search: mess,
+        search: mess.join(" "),
         degreeType: 'C'
       }, async function(err, result) {
         if (err) console.log(err);
@@ -170,7 +169,7 @@ client.on('message', msg => {
         embed.setTitle("Weather for " + mess)
         result = JSON.stringify(result, null, 2)
         console.log(result);
-        // embed.addField("Current Temperature: ", result.current.temperature)
+        embed.addField("Current Temperature: ", result[0].current.temperature)
         embed.setAuthor(msg.author.username, msg.author.authorURL)
         embed.setColor("BLUE")
         msg.channel.send(embed)
