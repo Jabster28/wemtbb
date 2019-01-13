@@ -170,7 +170,7 @@ client.on('message', msg => {
         embed.setTitle("Weather for " + mess)
         result = JSON.stringify(result, null, 2)
         console.log(result);
-        embed.addField("Current Temperature: ", result.current.temperature)
+        // embed.addField("Current Temperature: ", result.current.temperature)
         embed.setAuthor(msg.author.username, msg.author.authorURL)
         embed.setColor("BLUE")
         msg.channel.send(embed)
