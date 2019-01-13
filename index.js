@@ -168,11 +168,12 @@ client.on('message', msg => {
         embed = new Discord.RichEmbed();
         embed.setTitle("Weather for " + mess)
         result = JSON.stringify(result, null, 2)
-        console.log(result);
+        stuff.misc.push(result);
         embed.addField("Current Temperature: ", result[0].current.temperature)
         embed.setAuthor(msg.author.username, msg.author.authorURL)
         embed.setColor("BLUE")
         msg.channel.send(embed)
+        fs.writeFileSync("./stuff.json", JSON.stringify(stuff))
       });
     }
   }
