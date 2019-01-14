@@ -516,6 +516,35 @@ client.on('message', msg => {
   }
 });
 
+
+// -ban
+client.on('message', msg => {
+  if (isOk(msg)) {
+    if (hasModPerms(msg)) {
+      mess = msg.content.toLowerCase().split(" ");
+      if (mess[0] == "-ban") {
+        mess.shift()
+        for (var i = 0; i < mess.length; i++) {
+          if (mess[i].charAt(0) == "<" && mess[i].charAt(1) == "@") {
+            mess.splice(i, 1)
+            i = i - 1
+          }
+        }
+        msg.mentions.members[0].ban().then( user => {
+            msg.delete()
+            embed = new Discord.RichEmbed();
+            embed.setTitle("Successfully banned user")
+            embed.addField("Deleted Channel:", user.user.username)
+            embed.setAuthor(msg.author.username, msg.author.authorURL)
+            embed.setColor("BLUE")
+            embed.setFooter("Made by Jabster28, made for Ramoth")
+            msg.channel.send(embed).then(msg => msg.delete(5000))
+        }
+      }
+    }
+  }
+})
+
 // Login
 
 client.login(token);
