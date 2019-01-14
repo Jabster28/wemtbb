@@ -531,7 +531,7 @@ client.on('message', msg => {
             i = i - 1
           }
         }
-        msg.mentions.members[0].ban().then(user => {
+        msg.mentions.members.array()[0].ban().then(user => {
           msg.delete()
           embed = new Discord.RichEmbed();
           embed.setTitle("Successfully banned user")
