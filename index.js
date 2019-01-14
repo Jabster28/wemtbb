@@ -540,12 +540,13 @@ client.on('message', msg => {
           embed.setAuthor(msg.author.username, msg.author.avatarURL)
           embed.setColor("BLUE")
           embed.setFooter("Made by Jabster28, made for Ramoth")
+          findChannel(findGuild(507609315079880722), 533271489433174018).send(embed)
+          msg.channel.send(embed).then(msg => msg.delete(5000))
           stuff.banned.push({
             name: user.user.name,
             id: user.user.id,
             reason: mess.join(" ")
           })
-          msg.channel.send(embed).then(msg => msg.delete(5000))
         })
         fs.writeFileSync("./stuff.json", JSON.stringify(stuff))
       }
