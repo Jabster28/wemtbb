@@ -531,21 +531,20 @@ client.on('message', msg => {
             i = i - 1
           }
         }
-        msg.mentions.members[0].ban().then( user => {
-            msg.delete()
-            embed = new Discord.RichEmbed();
-            embed.setTitle("Successfully banned user")
-            embed.addField("Deleted Channel:", user.user.username)
-            embed.setAuthor(msg.author.username, msg.author.authorURL)
-            embed.setColor("BLUE")
-            embed.setFooter("Made by Jabster28, made for Ramoth")
-            msg.channel.send(embed).then(msg => msg.delete(5000))
-        }
+        msg.mentions.members[0].ban().then(user => {
+          msg.delete()
+          embed = new Discord.RichEmbed();
+          embed.setTitle("Successfully banned user")
+          embed.addField("Deleted Channel:", user.user.username)
+          embed.setAuthor(msg.author.username, msg.author.avatarURL)
+          embed.setColor("BLUE")
+          embed.setFooter("Made by Jabster28, made for Ramoth")
+          msg.channel.send(embed).then(msg => msg.delete(5000))
+        })
       }
     }
   }
 })
-
 // Login
 
 client.login(token);
