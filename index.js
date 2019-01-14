@@ -535,10 +535,16 @@ client.on('message', msg => {
           msg.delete()
           embed = new Discord.RichEmbed();
           embed.setTitle("Successfully banned user")
-          embed.addField("Deleted Channel:", user.user.username)
+          embed.addField("Deleted Channel:", "<@" + user.user.id + ">")
+          embed.addField("Reason:", mess.join(" "))
           embed.setAuthor(msg.author.username, msg.author.avatarURL)
           embed.setColor("BLUE")
           embed.setFooter("Made by Jabster28, made for Ramoth")
+          stuff.banned.push({
+            name: user.user.name,
+            id: user.user.id,
+            reason: mess.join(" ")
+          })
           msg.channel.send(embed).then(msg => msg.delete(5000))
         })
       }
