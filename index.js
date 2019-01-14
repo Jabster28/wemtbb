@@ -547,6 +547,7 @@ client.on('message', msg => {
           })
           msg.channel.send(embed).then(msg => msg.delete(5000))
         })
+        fs.writeFileSync("./stuff.json", JSON.stringify(stuff))
       }
     }
   }
