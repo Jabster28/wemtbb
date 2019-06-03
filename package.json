@@ -1,0 +1,14 @@
+{
+  "name": "wemt",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Jabster28/wempbb.git",
+  "author": "Jabster28 <justynboyer@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "colornames": "^1.1.1",
+    "discord.js": "^11.5.1",
+    "fs": "^0.0.1-security",
+    "weather-js": "^2.0.0"
+  }
+}
