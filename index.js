@@ -13,40 +13,32 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const token = process.env.tkn;
 const fs = require('fs');
-const ytdl = require('ytdl-core');
 var weather = require('weather-js');
-const streamOptions = {
-  seek: 0,
-  volume: 1
-};
-const ffmpeg = require("ffmpeg")
-const SQLite = require("better-sqlite3");
-const sql = new SQLite('./scores.sqlite');
 var stuff = JSON.parse(fs.readFileSync("./stuff.json"))
 const toHex = require("colornames")
 const notes = [{
   title: "Command List",
-  desc: "Add a command list (-commands) for people new with the bot",
+  desc: "Add a command list (!commands) for people new with the bot",
   type: "addition"
 }, {
   title: "Kick",
-  desc: "Make a kick command (-kick) for removing members",
+  desc: "Make a kick command (!kick) for removing members",
   type: "addition"
 }, {
   title: "Ban",
-  desc: "Make a ban command (-ban) for pernamently removing members",
+  desc: "Make a ban command (!ban) for pernamently removing members",
   type: "addition"
 }, {
   title: "Fun Command",
-  desc: "Add stuff (-roll, -gamble, -8ball) for entertainment",
+  desc: "Add stuff (!roll, !gamble, !8ball) for entertainment",
   type: "addition"
 }, {
   title: "Economy",
   desc: "Economy life. like working and getting money and viewing account and balance and daily rewards and store to buy stuff.",
   type: "addition"
 }, {
-  title: "-deletechannel",
-  desc: "Fix errors with -deletechannel",
+  title: "!deletechannel",
+  desc: "Fix errors with !deletechannel",
   type: "moderate"
 }, {
   title: "Add Embeds",
@@ -139,10 +131,10 @@ client.on('ready', () => {
 
 // Commands
 
-// -richembed
+// !richembed
 client.on('message', msg => {
   if (isOk(msg)) {
-    if (msg.content.toLowerCase() == "-richembed") {
+    if (msg.content.toLowerCase() == "!richembed") {
       embed = new Discord.RichEmbed();
       embed.setTitle("Title")
       embed.addField("Test Field Title", "Test addField")
@@ -154,11 +146,11 @@ client.on('message', msg => {
     }
   }
 });
-// -weather
+// !weather
 client.on('message', msg => {
   if (isOk(msg)) {
     mess = msg.content.toLowerCase().split(" ");
-    if (mess[0] == "-weather") {
+    if (mess[0] == "!weather") {
       mess.shift()
       weather.find({
         search: mess.join(" "),
@@ -178,11 +170,11 @@ client.on('message', msg => {
     }
   }
 });
-// -mod
+// !mod
 client.on('message', msg => {
   if (isOk(msg)) {
     mess = msg.content.toLowerCase().split(" ");
-    if (mess[0] == "-mod") {
+    if (mess[0] == "!mod") {
       if (hasModPerms(msg)) {
         for (var i = 0; i < msg.guild.roles.array().length; i++) {
           msg.guild.roles.array()[i] = role
@@ -205,12 +197,12 @@ client.on('message', msg => {
     }
   }
 });
-// -mute
+// !mute
 client.on('message', msg => {
   if (isOk(msg)) {
     if (hasModPerms(msg))
       mess = msg.content.toLowerCase().split(" ");
-    if (mess[0] == "-mute") {
+    if (mess[0] == "!mute") {
       if (msg.mentions.members.array()) {
         msg.mentions.members.array()[0].addRole(roleFind(msg.guild.roles.array(), 532257549534232586))
       }
@@ -218,12 +210,12 @@ client.on('message', msg => {
   }
 });
 
-// -unmute
+// !unmute
 client.on('message', msg => {
   if (isOk(msg)) {
     if (hasModPerms(msg))
       mess = msg.content.toLowerCase().split(" ");
-    if (mess[0] == "-unmute") {
+    if (mess[0] == "!unmute") {
       if (msg.mentions.members.array()) {
         msg.mentions.members.array()[0].removeRole(roleFind(msg.guild.roles.array(), 532257549534232586))
       }
@@ -231,10 +223,10 @@ client.on('message', msg => {
   }
 });
 
-// -ping
+// !ping
 client.on('message', msg => {
   if (isOk(msg)) {
-    if (msg.content.toLowerCase() == "-ping") {
+    if (msg.content.toLowerCase() == "!ping") {
       embed = new Discord.RichEmbed();
       embed.setTitle("🏓 Pong!")
       embed.addField("Took:", (client.ping + " milliseconds."))
@@ -245,12 +237,12 @@ client.on('message', msg => {
   }
 });
 
-// -createrole
+// !createrole
 client.on('message', msg => {
   if (isOk(msg)) {
     if (hasModPerms(msg)) {
       mess = msg.content.toLowerCase().split(" ");
-      if (mess[0] == "-createrole") {
+      if (mess[0] == "!createrole") {
         mess.shift()
         for (var i = 0; i < mess.length; i++) {
           if (mess[i].charAt(0) == "<" && mess[i].charAt(1) == "@") {
@@ -325,11 +317,11 @@ client.on('message', msg => {
   }
 });
 
-// -createchannel
+// !createchannel
 client.on('message', msg => {
   if (isOk(msg)) {
     mess = msg.content.toLowerCase().split(" ");
-    if (mess[0] == "-createchannel") {
+    if (mess[0] == "!createchannel") {
       if (hasModPerms(msg)) {
         mess.shift()
         for (var i = 0; i < mess.length; i++) {
@@ -387,11 +379,11 @@ client.on('message', msg => {
   }
 });
 
-// -join
+// !join
 client.on('message', msg => {
   if (isOk(msg)) {
     mess = msg.content.split(" ")
-    if (mess[0] == "-join") {
+    if (mess[0] == "!join") {
       if (msg.member.voiceChannel) {
         msg.member.voiceChannel.join().then(connection => {
           const stream = ytdl(mess[1], {
@@ -409,10 +401,10 @@ client.on('message', msg => {
   }
 });
 
-// -leave
+// !leave
 client.on('message', msg => {
   if (isOk(msg)) {
-    if (msg.content.toLowerCase() == "-leave") {
+    if (msg.content.toLowerCase() == "!leave") {
       if (msg.guild.me.voiceChannel) {
         msg.guild.me.voiceChannel.leave();
         msg.channel.send("Goodbye!")
@@ -421,11 +413,11 @@ client.on('message', msg => {
   }
 });
 
-// -deletechannel
+// !deletechannel
 client.on('message', msg => {
   if (isOk(msg)) {
     mess = msg.content.toLowerCase().split(" ");
-    if (mess[0] == "-deletechannel") {
+    if (mess[0] == "!deletechannel") {
       if (hasModPerms(msg)) {
         channame = msg.mentions.channels.array()[0].name
         if (arrayObjFindByName(stuff.channels, msg.mentions.channels.array()[0].name)) {
@@ -460,11 +452,11 @@ client.on('message', msg => {
   }
 });
 
-// -roll
+// !roll
 client.on('message', msg => {
   if (isOk(msg)) {
     mess = msg.content.toLowerCase().split(" ");
-    if (mess[0] == "-roll") {
+    if (mess[0] == "!roll") {
       if (mess[1]) {
         embed = new Discord.RichEmbed();
         embed.setAuthor("Is rolling a Dice...", msg.author.avatarURL)
@@ -484,24 +476,24 @@ client.on('message', msg => {
   }
 });
 
-// -info || -help
+// !info || !help
 client.on('message', msg => {
   if (isOk(msg)) {
-    if (msg.content.toLowerCase() == "-info" || msg.content.toLowerCase() == "-help") {
+    if (msg.content.toLowerCase() == "!info" || msg.content.toLowerCase() == "!help") {
       embed = new Discord.RichEmbed();
       embed.setTitle("RamBot, made for WEMT")
       embed.setDescription("Hi, my name is RamBot and i'm a bot made for the **WEMT** tournament server! RamBot is created by Jabster28 and ramoth, and its coded by Jabster28.")
       embed.setThumbnail("https://cdn.discordapp.com/attachments/507886876758245376/528996120966201348/rambot.png")
       embed.setColor("GREEN")
-      embed.setFooter("Ask Ramoth#3304 for more info!\nDo -commands for commands")
+      embed.setFooter("Ask Ramoth#3304 for more info!\nDo !commands for commands")
       msg.channel.send(embed)
     }
   }
 });
-// -devnotes
+// !devnotes
 client.on('message', msg => {
   if (isOk(msg)) {
-    if (msg.content.toLowerCase() == "-devnotes") {
+    if (msg.content.toLowerCase() == "!devnotes") {
       console.log("devnotes");
       for (var i = 0; i < notes.length; i++) {
         console.log("for loop");
@@ -518,12 +510,12 @@ client.on('message', msg => {
 });
 
 
-// -ban
+// !ban
 client.on('message', msg => {
   if (isOk(msg)) {
     if (hasModPerms(msg)) {
       mess = msg.content.toLowerCase().split(" ");
-      if (mess[0] == "-ban") {
+      if (mess[0] == "!ban") {
         mess.shift()
         for (var i = 0; i < mess.length; i++) {
           if (mess[i].charAt(0) == "<" && mess[i].charAt(1) == "@") {
